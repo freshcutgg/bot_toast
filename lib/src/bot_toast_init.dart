@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'basis.dart';
 import 'bot_toast_manager.dart';
 
-final GlobalKey<BotToastManagerState> _key = GlobalKey<BotToastManagerState>();
+late GlobalKey<BotToastManagerState> _key;
 
 BotToastManagerState get botToastManager {
   assert(_key.currentState != null);
@@ -19,7 +19,7 @@ class BotToastWidgetsBindingObserver with WidgetsBindingObserver {
   final List<PopTestFunc> _listener;
 
   static final BotToastWidgetsBindingObserver _singleton =
-      BotToastWidgetsBindingObserver._();
+  BotToastWidgetsBindingObserver._();
 
   static BotToastWidgetsBindingObserver get singleton => _singleton;
 
@@ -45,6 +45,8 @@ class BotToastWidgetsBindingObserver with WidgetsBindingObserver {
 // ignore: non_constant_identifier_names
 TransitionBuilder BotToastInit() {
   //确保提前初始化,保证WidgetsBinding.instance.addObserver(this);的顺序
+
+  _key = GlobalKey<BotToastManagerState>();
 
   //ignore: unnecessary_statements
   BotToastWidgetsBindingObserver._singleton;
